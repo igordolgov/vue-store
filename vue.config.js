@@ -1,4 +1,4 @@
 module.exports = {
-//    publicPath: '/moire-store/'    
-    publicPath: '/'    
+//    publicPath: '/'    
+    publicPath: '/vue-store/'    
 }

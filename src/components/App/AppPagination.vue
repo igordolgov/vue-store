@@ -1,9 +1,9 @@
 <template>
   <ul class="catalog__pagination pagination">
     <li class="pagination__item">
-      <a class="pagination__link pagination__link--arrow" 
-        :class="{'pagination__link--disabled': page === 1}" 
-        href="#" 
+      <a class="pagination__link pagination__link--arrow"
+        :class="{'pagination__link--disabled': page === 1}"
+        href="#"
         aria-label="Предыдущая страница"
         @click.prevent="paginate(page - 1)"
       >
@@ -12,12 +12,12 @@
         </svg>
       </a>
     </li>
-    <li class="pagination__item" 
-      v-for="pageNumber in pages" 
+    <li class="pagination__item"
+      v-for="pageNumber in pages"
       :key="pageNumber"
     >
-      <a href="#" 
-        class="pagination__link" 
+      <a href="#"
+        class="pagination__link"
         :class="{'pagination__link--current': pageNumber === page}"
         @click.prevent="paginate(pageNumber)"
       >
@@ -25,10 +25,10 @@
       </a>
     </li>
     <li class="pagination__item">
-      <a class="pagination__link pagination__link--arrow" 
+      <a class="pagination__link pagination__link--arrow"
         :class="{'pagination__link--disabled': page === pages}"
-        href="#" 
-        aria-label="Следующая страница" 
+        href="#"
+        aria-label="Следующая страница"
         @click.prevent="paginate(page + 1)"
       >
         <svg width="8" height="14" fill="currentColor">
@@ -42,16 +42,20 @@
 <script>
 export default {
   name: 'AppPagination',
+
   model: {
     prop: 'page',
     event: 'input',
   },
+
   props: ['page', 'count', 'perPage'],
+
   computed: {
     pages() {
       return Math.ceil(this.count / this.perPage)
     }
   },
+
   methods: {
     paginate(pageNumber) {
       if (pageNumber >= 1 && pageNumber <= this.pages)

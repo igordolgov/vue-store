@@ -1,3 +1,4 @@
+// Xранилище данных
 export default {
     cartProducts: [],
     userAccessKey: null,

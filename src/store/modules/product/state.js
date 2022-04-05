@@ -1,3 +1,4 @@
+// Xранилище данных
 export default {
     productData: null,
     productLoading: false,

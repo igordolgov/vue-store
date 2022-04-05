@@ -1,3 +1,4 @@
+// Xранилище данных
 export default {
     orderInfo: null,
     deliveryData: null,

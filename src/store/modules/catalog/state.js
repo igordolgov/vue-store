@@ -1,3 +1,4 @@
+// Xранилище данных
 export default {
     items: [],
     productsLoading: false,
@@ -8,7 +9,7 @@ export default {
     filterCategory: 0,
     filterSeasons: [],
     filterMaterials: [],
-    
+
     page: 1,
     productsPerPage: 6,
     productsData: null,
