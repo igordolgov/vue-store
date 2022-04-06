@@ -11,14 +11,14 @@
       </div>
     </div>
     <div class="content__catalog">
-      <ProductFilter 
-        :priceFrom="filterPriceFrom" 
-        :priceTo="filterPriceTo" 
+      <ProductFilter
+        :priceFrom="filterPriceFrom"
+        :priceTo="filterPriceTo"
         :categoryId="filterCategory"
-        :seasons="filterSeasons" 
-        :materials="filterMaterials" 
+        :seasons="filterSeasons"
+        :materials="filterMaterials"
         @updateFilter="updateFilter"
-      /> 
+      />
 
       <section class="catalog">
         <div v-if="productsLoading">
@@ -74,26 +74,31 @@ export default {
         this.$store.commit("catalog/setPage", value);
       },
     },
+    // Фильтрация цены "От"
     filterPriceFrom: {
       get() { return this.$store.getters['catalog/getFilterPriceFrom'] },
       set(value) { this.$store.commit("catalog/setFilterPriceFrom", value);},
-    }, 
+    },
+    // Фильтрация цены "До"
     filterPriceTo: {
       get() { return this.$store.getters['catalog/getFilterPriceTo'] },
       set(value) { this.$store.commit("catalog/setFilterPriceTo", value);},
-    }, 
+    },
+    // Фильтрация товаров по категории
     filterCategory: {
       get() { return this.$store.getters['catalog/getFilterCategory'] },
       set(value) { this.$store.commit("catalog/setFilterCategory", value);},
-    }, 
+    },
+    // Фильтрация товаров по сезону
     filterSeasons: {
       get() { return this.$store.getters['catalog/getFilterSeasons'] },
       set(value) { this.$store.commit("catalog/setFilterSeasons", value);},
-    }, 
+    },
+    // Фильтрация товаров по материалам
     filterMaterials: {
       get() { return this.$store.getters['catalog/getFilterMaterials'] },
       set(value) { this.$store.commit("catalog/setFilterMaterials", value);},
-    }, 
+    },
     ...mapGetters("catalog", {
       productsData: "getProductsData",
       productsLoading: "getProductsLoading",
@@ -109,15 +114,18 @@ export default {
         getNumEnding(this.countProducts, ["товар", "товара", "товаров"])
       );
     },
+    // Список товаров
     products() {
       return this.productsData ? this.productsData.items : []
     },
   },
+
   methods: {
     ...mapActions("catalog", ["loadProducts"]),
     reload() {
       this.loadProducts()
     },
+    //Обновить фильтр товаров
     updateFilter(newFilter) {
       this.filterPriceFrom = newFilter.priceFrom
       this.filterPriceTo = newFilter.priceTo
@@ -127,7 +135,10 @@ export default {
       this.loadProducts()
     }
   },
+
+  // При загрузке страницы
   created() {
+    // выполнить функцию загрузки товаров из API
     this.loadProducts()
   },
 }

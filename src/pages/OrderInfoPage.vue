@@ -1,5 +1,5 @@
 <template>
-  <main class="content container" 
+  <main class="content container"
     v-if="loading"
   >
     <LoaderInfo title="Получение информации" />
@@ -8,14 +8,14 @@
     <div class="content__top">
       <ul class="breadcrumbs">
         <li class="breadcrumbs__item">
-          <router-link class="breadcrumbs__link" 
+          <router-link class="breadcrumbs__link"
             :to="{name: 'main'}"
           >
             Каталог
           </router-link>
         </li>
         <li class="breadcrumbs__item">
-          <router-link class="breadcrumbs__link" 
+          <router-link class="breadcrumbs__link"
             :to="{name: 'cart'}"
           >
             Корзина
@@ -28,7 +28,7 @@
         </li>
       </ul>
 
-      <h1 class="content__title" 
+      <h1 class="content__title"
         v-if="orderInfo"
       >
         Заказ оформлен <span>№ {{ orderInfo.id }}</span>
@@ -36,17 +36,17 @@
     </div>
 
     <section class="cart">
-      <form class="cart__form form" 
-        action="#" 
+      <form class="cart__form form"
+        action="#"
         method="POST"
       >
         <div class="cart__field">
           <p class="cart__message">
-            Благодарим за&nbsp;выбор нашего магазина. На&nbsp;Вашу почту придет письмо с&nbsp;деталями заказа. 
+            Благодарим за&nbsp;выбор нашего магазина. На&nbsp;Вашу почту придет письмо с&nbsp;деталями заказа.
             Наши менеджеры свяжутся с&nbsp;Вами в&nbsp;течение часа для уточнения деталей доставки.
           </p>
 
-          <ul class="dictionary" 
+          <ul class="dictionary"
             v-if="orderInfo"
           >
             <li class="dictionary__item">
@@ -92,16 +92,16 @@
           </ul>
         </div>
         <div class="cart__block">
-          <ul class="cart__orders" 
+          <ul class="cart__orders"
             v-if="orderPositionsCount"
           >
-            <CartProductInfo 
-              v-for="item in orderProducts" 
-              :cartItem="item" 
+            <CartProductInfo
+              v-for="item in orderProducts"
+              :cartItem="item"
               :key="item.id"
             />
           </ul>
-          <div class="cart__total" 
+          <div class="cart__total"
             v-if="orderPositionsCount"
           >
             <p>Доставка: <b>500 ₽</b></p>
@@ -112,6 +112,7 @@
     </section>
   </main>
 </template>
+
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import CartProductInfo from '@/components/Cart/CartProductInfo.vue'
@@ -121,6 +122,7 @@ import getNumEnding from '@/helpers/getNumEnding'
 
 export default {
     name: 'OrderInfoPage',
+
     data() {
       return {
         loading: false,
@@ -128,10 +130,11 @@ export default {
     },
     components: { CartProductInfo, LoaderInfo },
     filters: { numberFormat },
+
     computed: {
-        ...mapGetters("order", { 
+        ...mapGetters("order", {
           orderInfo: 'getOrderInfo',
-          orderProducts: 'orderProducts' 
+          orderProducts: 'orderProducts'
         }),
         ...mapGetters("cart", ["getUserAccessKey"]),
         orderPositionsCount() {
@@ -144,6 +147,7 @@ export default {
             return this.orderProducts.reduce((acc, item) => { return acc + item.positionCost}, 0)
         }
     },
+
     methods: {
       ...mapActions("order", ["loadOrderInfo"]),
       loadOrderDetails() {
@@ -152,24 +156,26 @@ export default {
             return;
         }
         this.loading = true
-        this.loadOrderInfo({ 
-          orderId: this.$route.params.id, 
+        this.loadOrderInfo({
+          orderId: this.$route.params.id,
           userAccessKey: this.getUserAccessKey
         })
-          .catch((err) => { 
+          .catch((err) => {
             console.log(err)
             this.$router.replace({name: 'notFound', params: { '0': '/' }})
           })
           .then(() => this.loading = false)
       }
     },
+
+    // watch (слежение) применяется когда есть данные, которые необходимо обновлять при изменении других данных
     watch: {
       '$route.params.id': {
         handler() {
           this.loadOrderDetails()
         },
         immediate: true
-      }      
+      }
     },
 }
 </script>

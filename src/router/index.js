@@ -8,7 +8,7 @@ import OrderPage from "@/pages/OrderPage.vue";
 import OrderInfoPage from "@/pages/OrderInfoPage.vue";
 
 Vue.use(VueRouter)
-const routes = [
+const routes = [ // Добавляем маршруты
     { name: 'main', component: MainPage, path: '/' },
     { name: 'product', component: ProductPage, path: '/product/:id' },
     { name: 'cart', component: CartPage, path: '/cart' },
@@ -16,7 +16,7 @@ const routes = [
     { name: 'orderInfo', component: OrderInfoPage, path: '/order/:id' },
     { name: 'notFound', component: NotFoundPage, path: '*' },
 ]
-const router = new VueRouter({
+const router = new VueRouter({ // Создаём новый экземпляр VueRouter
     routes
 })
 

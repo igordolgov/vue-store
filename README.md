@@ -1,5 +1,3 @@
-# technozavr
-
 ## Project setup
 ```
 npm install

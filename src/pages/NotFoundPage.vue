@@ -1,8 +1,9 @@
 <template>
-    <h1>PAGE NOT FOUND</h1>
+    <h1>СТРАНИЦА НЕ НАЙДЕНА</h1>
 </template>
+
 <script>
-export default {
-    name: 'NotFoundPage',
-}
+    export default {
+        name: 'NotFoundPage',
+    }
 </script>
